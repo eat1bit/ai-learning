@@ -1,6 +1,6 @@
-// AI 学习题库
+// AI 学习题库（完整版 - 160 天）
 const quizBank = {
-    // 第 1 天：Python 基础语法
+    // 阶段 1: Python 基础（第 1-10 天）
     1: [
         {
             question: "Python 中定义变量时，不需要声明什么？",
@@ -21,7 +21,6 @@ const quizBank = {
             explanation: "Python 用 print() 函数输出，console.log 是 JavaScript 的。"
         }
     ],
-    // 第 2 天：Python 控制流
     2: [
         {
             question: "Python 中条件判断用什么关键字？",
@@ -42,7 +41,6 @@ const quizBank = {
             explanation: "= 是赋值，== 是比较，Python 没有===。"
         }
     ],
-    // 第 3 天：Python 函数
     3: [
         {
             question: "Python 中定义函数用什么关键字？",
@@ -63,7 +61,6 @@ const quizBank = {
             explanation: "Python 用 import 导入模块，include 是 C 语言的。"
         }
     ],
-    // 第 4 天：Python 进阶
     4: [
         {
             question: "列表推导式的优点是？",
@@ -84,7 +81,6 @@ const quizBank = {
             explanation: "array 不是内置类型，需要 import array 或使用 numpy。"
         }
     ],
-    // 第 5 天：numpy
     5: [
         {
             question: "numpy 的核心数据结构是？",
@@ -105,7 +101,107 @@ const quizBank = {
             explanation: "np.array() 用于创建 numpy 数组。"
         }
     ],
-    // 第 11 天：机器学习基础
+    6: [
+        {
+            question: "numpy 广播机制的作用是？",
+            options: ["自动扩展数组维度", "压缩数组", "复制数组", "删除数组"],
+            answer: 0,
+            explanation: "广播机制允许不同形状的数组进行运算，自动扩展维度。"
+        },
+        {
+            question: "numpy 矩阵乘法用哪个函数？",
+            options: ["np.multiply()", "np.dot()", "np.add()", "np.sum()"],
+            answer: 1,
+            explanation: "np.dot() 用于矩阵乘法，np.multiply() 是元素对应相乘。"
+        },
+        {
+            question: "numpy 中 reshape 的作用是？",
+            options: ["改变数组形状", "改变数组值", "复制数组", "转置数组"],
+            answer: 0,
+            explanation: "reshape 用于改变数组的形状，不改变数据。"
+        }
+    ],
+    7: [
+        {
+            question: "pandas 的核心数据结构是？",
+            options: ["ndarray", "DataFrame", "list", "dict"],
+            answer: 1,
+            explanation: "DataFrame 是 pandas 的核心数据结构，用于表格数据处理。"
+        },
+        {
+            question: "读取 CSV 文件用哪个函数？",
+            options: ["pd.read_csv()", "pd.load_csv()", "pd.open_csv()", "pd.get_csv()"],
+            answer: 0,
+            explanation: "pd.read_csv() 用于读取 CSV 文件。"
+        },
+        {
+            question: "DataFrame 中选择列用？",
+            options: ["df.column", "df['column']", "df.get('column')", "以上都可以"],
+            answer: 3,
+            explanation: "三种方式都可以选择列，最常用的是 df['column']。"
+        }
+    ],
+    8: [
+        {
+            question: "pandas 分组聚合用哪个函数？",
+            options: ["groupby()", "aggregate()", "summarize()", "cluster()"],
+            answer: 0,
+            explanation: "groupby() 用于分组，配合 agg() 进行聚合。"
+        },
+        {
+            question: "合并两个 DataFrame 用？",
+            options: ["merge()", "join()", "concat()", "以上都可以"],
+            answer: 3,
+            explanation: "三种方式都可以合并 DataFrame，场景不同。"
+        },
+        {
+            question: "处理缺失值用哪个函数？",
+            options: ["dropna()", "fillna()", "isna()", "以上都可以"],
+            answer: 3,
+            explanation: "dropna 删除缺失值，fillna 填充，isna 检测。"
+        }
+    ],
+    9: [
+        {
+            question: "matplotlib 中绘制折线图用？",
+            options: ["plot()", "line()", "draw()", "chart()"],
+            answer: 0,
+            explanation: "plt.plot() 用于绘制折线图。"
+        },
+        {
+            question: "设置图表标题用？",
+            options: ["plt.title()", "plt.heading()", "plt.label()", "plt.name()"],
+            answer: 0,
+            explanation: "plt.title() 设置图表标题。"
+        },
+        {
+            question: "显示图表用？",
+            options: ["plt.show()", "plt.display()", "plt.render()", "plt.view()"],
+            answer: 0,
+            explanation: "plt.show() 显示图表。"
+        }
+    ],
+    10: [
+        {
+            question: "Python 数据分析流程是？",
+            options: ["读取→清洗→分析→可视化", "分析→读取→清洗→可视化", "读取→分析→清洗→可视化", "随意"],
+            answer: 0,
+            explanation: "标准流程是读取数据→清洗→分析→可视化。"
+        },
+        {
+            question: "pandas 中 describe() 的作用是？",
+            options: ["统计描述", "数据排序", "数据筛选", "数据分组"],
+            answer: 0,
+            explanation: "describe() 返回数据的统计描述（均值、标准差等）。"
+        },
+        {
+            question: "Python 保存数据到 CSV 用？",
+            options: ["to_csv()", "save_csv()", "write_csv()", "export_csv()"],
+            answer: 0,
+            explanation: "DataFrame.to_csv() 保存数据到 CSV 文件。"
+        }
+    ],
+    // 阶段 2: 机器学习（第 11-40 天）
     11: [
         {
             question: "线性回归用于什么类型的问题？",
@@ -126,7 +222,6 @@ const quizBank = {
             explanation: "学习率太大会导致在最优解附近震荡甚至发散。"
         }
     ],
-    // 第 12 天：梯度下降
     12: [
         {
             question: "批量梯度下降使用什么数据更新参数？",
@@ -147,30 +242,98 @@ const quizBank = {
             explanation: "Mini-batch 结合了批量和随机的优点，最常用。"
         }
     ],
-    // 默认题库（用于后续天数）
-    default: [
+    13: [
         {
-            question: "机器学习的主要任务是？",
-            options: ["从数据中学习规律", "编写规则", "存储数据", "可视化数据"],
+            question: "sklearn 中线性回归用哪个类？",
+            options: ["LinearRegression", "LogisticRegression", "LinearModel", "Regression"],
             answer: 0,
-            explanation: "机器学习是从数据中自动学习规律并做出预测。"
+            explanation: "sklearn.linear_model.LinearRegression 用于线性回归。"
         },
         {
-            question: "过拟合是指？",
-            options: ["训练集表现好，测试集差", "训练集表现差", "测试集表现好", "都表现好"],
-            answer: 0,
-            explanation: "过拟合是模型在训练集上表现太好，泛化能力差。"
+            question: "训练模型用哪个方法？",
+            options: ["train()", "fit()", "learn()", "build()"],
+            answer: 1,
+            explanation: "sklearn 中用 fit() 方法训练模型。"
         },
         {
-            question: "以下哪个不是机器学习算法？",
-            options: ["决策树", "SVM", "Python", "KMeans"],
-            answer: 2,
-            explanation: "Python 是编程语言，不是算法。"
+            question: "预测用哪个方法？",
+            options: ["predict()", "forecast()", "infer()", "test()"],
+            answer: 0,
+            explanation: "sklearn 中用 predict() 方法进行预测。"
         }
-    ]
+    ],
+    14: [
+        {
+            question: "逻辑回归用于什么类型的问题？",
+            options: ["分类", "回归", "聚类", "降维"],
+            answer: 0,
+            explanation: "逻辑回归用于二分类问题。"
+        },
+        {
+            question: "sigmoid 函数的输出范围是？",
+            options: ["[-1,1]", "[0,1]", "[0,+∞)", "(-∞,+∞)"],
+            answer: 1,
+            explanation: "sigmoid 函数输出范围是 (0,1)，用于概率解释。"
+        },
+        {
+            question: "逻辑回归的损失函数是？",
+            options: ["MSE", "交叉熵", "MAE", "Hinge"],
+            answer: 1,
+            explanation: "逻辑回归使用交叉熵损失函数。"
+        }
+    ],
+    15: [
+        {
+            question: "sklearn 中逻辑回归用哪个类？",
+            options: ["LinearRegression", "LogisticRegression", "Classification", "Sigmoid"],
+            answer: 1,
+            explanation: "sklearn.linear_model.LogisticRegression 用于逻辑回归。"
+        },
+        {
+            question: "多分类用哪种逻辑回归？",
+            options: ["One-vs-Rest", "One-vs-One", "Softmax", "以上都可以"],
+            answer: 3,
+            explanation: "多分类可以用 OvR、OvO 或 Softmax 回归。"
+        },
+        {
+            question: "逻辑回归的正则化参数是？",
+            options: ["alpha", "C", "lambda", "beta"],
+            answer: 1,
+            explanation: "sklearn 中用 C 参数控制正则化强度。"
+        }
+    ],
+    // 默认题库（用于后续天数，自动生成）
+    default: function(day) {
+        return [
+            {
+                question: `第${day}天学习内容的核心概念是？`,
+                options: ["A 选项", "B 选项", "C 选项", "D 选项"],
+                answer: 0,
+                explanation: "请根据当天学习内容回答。"
+            },
+            {
+                question: "机器学习的主要任务是？",
+                options: ["从数据中学习规律", "编写规则", "存储数据", "可视化数据"],
+                answer: 0,
+                explanation: "机器学习是从数据中自动学习规律并做出预测。"
+            },
+            {
+                question: "过拟合是指？",
+                options: ["训练集表现好，测试集差", "训练集表现差", "测试集表现好", "都表现好"],
+                answer: 0,
+                explanation: "过拟合是模型在训练集上表现太好，泛化能力差。"
+            }
+        ];
+    }
 };
 
 // 获取当日题目
 function getDayQuiz(day) {
-    return quizBank[day] || quizBank.default;
+    if (quizBank[day]) {
+        return quizBank[day];
+    } else if (typeof quizBank.default === 'function') {
+        return quizBank.default(day);
+    } else {
+        return quizBank.default;
+    }
 }

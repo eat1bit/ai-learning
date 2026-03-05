@@ -25,7 +25,12 @@ function loadLearningContent() {
     
     document.getElementById('dayNum').textContent = currentDay;
     document.getElementById('contentTitle').textContent = plan.title;
-    document.getElementById('contentResource').textContent = plan.resource;
+    
+    // 设置资源链接（可点击）
+    const resourceLink = document.getElementById('contentResource');
+    resourceLink.textContent = plan.resource + ' ↗';
+    resourceLink.href = plan.resourceUrl || '#';
+    
     document.getElementById('contentTask').textContent = plan.task;
     document.getElementById('contentTime').textContent = plan.time;
     
