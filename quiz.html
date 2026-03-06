@@ -48,6 +48,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         
         .progress-text {
@@ -61,7 +63,7 @@
             border-radius: 5px;
             transition: width 0.3s ease;
             flex: 1;
-            margin: 0 15px;
+            min-width: 100px;
         }
         
         .question-card {
@@ -89,6 +91,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         
         .question-number {
@@ -199,6 +203,7 @@
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             margin-top: 20px;
+            margin-right: 10px;
         }
         
         .btn:hover {
@@ -214,7 +219,6 @@
         
         .btn-secondary {
             background: #6b7280;
-            margin-left: 10px;
         }
         
         .result-card {
@@ -296,45 +300,203 @@
             background: white;
             color: #667eea;
         }
+        
+        .wrong-answers {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+        }
+        
+        .wrong-answers.show {
+            display: block;
+        }
+        
+        .wrong-answers h3 {
+            color: #dc2626;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .wrong-item {
+            padding: 15px;
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .wrong-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .wrong-question {
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+        
+        .wrong-answer {
+            color: #dc2626;
+            font-size: 0.9em;
+        }
+        
+        .correct-answer {
+            color: #16a34a;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .explanation-preview {
+            color: #6b7280;
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .mode-selector {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .mode-selector h2 {
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+        
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .mode-card {
+            padding: 20px;
+            border: 3px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .mode-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .mode-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+        
+        .mode-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .mode-title {
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+        
+        .mode-desc {
+            font-size: 0.85em;
+            color: #6b7280;
+        }
+        
+        .start-btn-container {
+            text-align: center;
+            margin-top: 25px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>📚 AI 学习题库</h1>
-            <p>20 道精选题目，检验你的学习成果</p>
+            <p>分阶段学习，循序渐进</p>
         </header>
         
-        <div class="category-filter" id="categoryFilter">
-            <button class="filter-btn active" data-category="all">全部</button>
-            <button class="filter-btn" data-category="python-basic">Python 基础</button>
-            <button class="filter-btn" data-category="ml-basic">机器学习</button>
-            <button class="filter-btn" data-category="data-processing">数据处理</button>
-            <button class="filter-btn" data-category="model-eval">模型评估</button>
-            <button class="filter-btn" data-category="python-practice">Python 实战</button>
+        <!-- 模式选择 -->
+        <div class="mode-selector" id="modeSelector">
+            <h2>📖 选择学习阶段</h2>
+            <div class="mode-grid">
+                <div class="mode-card" data-mode="python-basic" data-count="9">
+                    <div class="mode-icon">🐍</div>
+                    <div class="mode-title">Python 基础</div>
+                    <div class="mode-desc">第 1-10 天 · 9 道题</div>
+                </div>
+                <div class="mode-card" data-mode="ml-basic" data-count="5">
+                    <div class="mode-icon">🤖</div>
+                    <div class="mode-title">机器学习基础</div>
+                    <div class="mode-desc">第 11-30 天 · 5 道题</div>
+                </div>
+                <div class="mode-card" data-mode="data-processing" data-count="3">
+                    <div class="mode-icon">📊</div>
+                    <div class="mode-title">数据处理</div>
+                    <div class="mode-desc">pandas/numpy · 3 道题</div>
+                </div>
+                <div class="mode-card" data-mode="model-eval" data-count="3">
+                    <div class="mode-icon">📈</div>
+                    <div class="mode-title">模型评估</div>
+                    <div class="mode-desc">评估指标 · 3 道题</div>
+                </div>
+                <div class="mode-card" data-mode="all" data-count="20">
+                    <div class="mode-icon">🎯</div>
+                    <div class="mode-title">全部题目</div>
+                    <div class="mode-desc">综合测试 · 20 道题</div>
+                </div>
+            </div>
+            <div class="start-btn-container">
+                <button class="btn" id="startBtn" onclick="startQuiz()" disabled>开始答题</button>
+            </div>
         </div>
         
-        <div class="progress-bar">
-            <span class="progress-text">进度：<span id="currentNum">1</span>/20</span>
-            <div class="progress-fill" id="progressFill" style="width: 5%"></div>
-            <span class="progress-text">得分：<span id="scoreNum">0</span></span>
+        <!-- 答题界面 -->
+        <div id="quizInterface" class="hidden">
+            <div class="category-filter">
+                <button class="filter-btn active" onclick="toggleExplanation()">💡 显示/隐藏解析</button>
+                <button class="filter-btn" onclick="backToMode()">🔄 切换阶段</button>
+            </div>
+            
+            <div class="progress-bar">
+                <span class="progress-text">进度：<span id="currentNum">1</span>/<span id="totalNum">20</span></span>
+                <div class="progress-fill" id="progressFill" style="width: 5%"></div>
+                <span class="progress-text">得分：<span id="scoreNum">0</span></span>
+            </div>
+            
+            <div id="quizContainer">
+                <!-- 题目会动态加载 -->
+            </div>
+            
+            <div class="wrong-answers" id="wrongAnswers">
+                <h3>❌ 错题本</h3>
+                <div id="wrongList"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" id="nextBtn" onclick="nextQuestion()" disabled>下一题</button>
+                <button class="btn btn-secondary" id="submitBtn" onclick="showResult()">提交试卷</button>
+            </div>
         </div>
         
-        <div id="quizContainer">
-            <!-- 题目会动态加载 -->
-        </div>
-        
+        <!-- 结果界面 -->
         <div class="result-card" id="resultCard">
             <div class="score-circle" id="scoreCircle">0%</div>
             <h2 class="result-title" id="resultTitle">完成答题！</h2>
             <p class="result-text" id="resultText">继续加油！</p>
             <button class="btn" onclick="restartQuiz()">重新开始</button>
             <button class="btn btn-secondary" onclick="reviewWrong()">查看错题</button>
-        </div>
-        
-        <div style="text-align: center; margin-top: 20px;">
-            <button class="btn" id="nextBtn" onclick="nextQuestion()" disabled>下一题</button>
-            <button class="btn btn-secondary" id="submitBtn" onclick="showResult()">提交试卷</button>
+            <button class="btn btn-secondary" onclick="backToMode()">选择其他阶段</button>
         </div>
     </div>
 
@@ -525,12 +687,50 @@
         let currentQuestion = 0;
         let score = 0;
         let userAnswers = [];
-        let filteredQuestions = questions;
+        let filteredQuestions = [];
         let answeredQuestions = new Set();
+        let wrongAnswers = [];
+        let selectedMode = '';
+        let showExplanationAlways = true;
 
-        function init() {
+        // 模式选择
+        document.querySelectorAll('.mode-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedMode = this.dataset.mode;
+                document.getElementById('startBtn').disabled = false;
+            });
+        });
+
+        function startQuiz() {
+            if (!selectedMode) return;
+            
+            if (selectedMode === 'all') {
+                filteredQuestions = questions;
+            } else {
+                filteredQuestions = questions.filter(q => q.category === selectedMode);
+            }
+            
+            document.getElementById('modeSelector').classList.add('hidden');
+            document.getElementById('quizInterface').classList.remove('hidden');
+            document.getElementById('totalNum').textContent = filteredQuestions.length;
+            
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = [];
+            answeredQuestions = new Set();
+            wrongAnswers = [];
+            
             loadQuestion(0);
             updateProgress();
+        }
+
+        function backToMode() {
+            document.getElementById('modeSelector').classList.remove('hidden');
+            document.getElementById('quizInterface').classList.add('hidden');
+            document.getElementById('resultCard').classList.remove('show');
+            document.getElementById('wrongAnswers').classList.remove('show');
         }
 
         function loadQuestion(index) {
@@ -552,7 +752,7 @@
                             </div>
                         `).join('')}
                     </div>
-                    <div class="explanation" id="explanation">
+                    <div class="explanation ${showExplanationAlways ? '' : 'show'}" id="explanation">
                         <div class="explanation-title">💡 解析</div>
                         <div class="explanation-text">${q.explanation}</div>
                     </div>
@@ -572,6 +772,18 @@
             document.getElementById('nextBtn').disabled = false;
         }
 
+        function toggleExplanation() {
+            showExplanationAlways = !showExplanationAlways;
+            const explanation = document.getElementById('explanation');
+            if (explanation) {
+                if (showExplanationAlways) {
+                    explanation.classList.add('show');
+                } else {
+                    explanation.classList.remove('show');
+                }
+            }
+        }
+
         function nextQuestion() {
             const q = filteredQuestions[currentQuestion];
             const options = document.querySelectorAll('.option');
@@ -589,6 +801,14 @@
             // 显示解析
             document.getElementById('explanation').classList.add('show');
             
+            // 记录错题
+            if (userAnswers[currentQuestion] !== q.answer) {
+                wrongAnswers.push({
+                    question: q,
+                    userAnswer: userAnswers[currentQuestion]
+                });
+            }
+            
             // 计分
             if (userAnswers[currentQuestion] === q.answer && !answeredQuestions.has(currentQuestion)) {
                 score++;
@@ -596,26 +816,27 @@
                 updateProgress();
             }
             
-            // 延迟后切换到下一题
-            setTimeout(() => {
-                if (currentQuestion < filteredQuestions.length - 1) {
+            // 等待用户点击下一题
+            if (currentQuestion < filteredQuestions.length - 1) {
+                document.getElementById('nextBtn').textContent = '下一题';
+                document.getElementById('nextBtn').onclick = function() {
                     currentQuestion++;
                     loadQuestion(currentQuestion);
-                } else {
-                    document.getElementById('nextBtn').style.display = 'none';
-                    document.getElementById('submitBtn').textContent = '查看结果';
-                }
-            }, 2000);
+                };
+            } else {
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('submitBtn').textContent = '查看结果';
+            }
         }
 
         function updateProgress() {
-            const percentage = ((currentQuestion + 1) / questions.length) * 100;
+            const percentage = ((currentQuestion + 1) / filteredQuestions.length) * 100;
             document.getElementById('progressFill').style.width = percentage + '%';
             document.getElementById('scoreNum').textContent = score;
         }
 
         function showResult() {
-            const percentage = Math.round((score / questions.length) * 100);
+            const percentage = Math.round((score / filteredQuestions.length) * 100);
             const circle = document.getElementById('scoreCircle');
             const title = document.getElementById('resultTitle');
             const text = document.getElementById('resultText');
@@ -626,21 +847,36 @@
             if (percentage >= 80) {
                 circle.classList.add('excellent');
                 title.textContent = '🎉 太棒了！';
-                text.textContent = '你对 AI 知识掌握得很好，继续保持！';
+                text.textContent = `${filteredQuestions.length} 道题答对 ${score} 道，继续加油！`;
             } else if (percentage >= 60) {
                 circle.classList.add('good');
                 title.textContent = '👍 不错哦！';
-                text.textContent = '已经掌握大部分知识，再复习一下会更好！';
+                text.textContent = `答对 ${score}/${filteredQuestions.length}，再复习一下会更好！`;
             } else {
                 circle.classList.add('need-improve');
                 title.textContent = '💪 继续加油！';
-                text.textContent = '多练习几次，你一定能行！';
+                text.textContent = `答对 ${score}/${filteredQuestions.length}，多练习几次一定能行！`;
+            }
+            
+            // 显示错题本
+            if (wrongAnswers.length > 0) {
+                const wrongList = document.getElementById('wrongList');
+                wrongList.innerHTML = wrongAnswers.map(w => `
+                    <div class="wrong-item">
+                        <div class="wrong-question">${w.question.number}. ${w.question.text}</div>
+                        <div class="wrong-answer">你的答案：${w.userAnswer}</div>
+                        <div class="correct-answer">正确答案：${w.question.answer}</div>
+                        <div class="explanation-preview">💡 ${w.question.explanation}</div>
+                    </div>
+                `).join('');
+                document.getElementById('wrongAnswers').classList.add('show');
             }
             
             document.getElementById('quizContainer').style.display = 'none';
             document.getElementById('resultCard').classList.add('show');
             document.getElementById('submitBtn').style.display = 'none';
             document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('wrongAnswers').scrollIntoView({ behavior: 'smooth' });
         }
 
         function restartQuiz() {
@@ -648,56 +884,45 @@
             score = 0;
             userAnswers = [];
             answeredQuestions = new Set();
-            filteredQuestions = questions;
+            wrongAnswers = [];
             
             document.getElementById('quizContainer').style.display = 'block';
             document.getElementById('resultCard').classList.remove('show');
+            document.getElementById('wrongAnswers').classList.remove('show');
             document.getElementById('submitBtn').style.display = 'inline-block';
             document.getElementById('nextBtn').style.display = 'inline-block';
             document.getElementById('submitBtn').textContent = '提交试卷';
+            document.getElementById('nextBtn').textContent = '下一题';
             
             loadQuestion(0);
             updateProgress();
         }
 
         function reviewWrong() {
-            const wrongQuestions = questions.filter((q, i) => userAnswers[i] !== q.answer);
-            if (wrongQuestions.length === 0) {
+            if (wrongAnswers.length === 0) {
                 alert('太棒了！你没有错题！');
                 return;
             }
-            filteredQuestions = wrongQuestions;
+            filteredQuestions = wrongAnswers.map(w => w.question);
             currentQuestion = 0;
+            score = 0;
+            userAnswers = [];
+            answeredQuestions = new Set();
+            
             document.getElementById('resultCard').classList.remove('show');
+            document.getElementById('wrongAnswers').classList.remove('show');
             document.getElementById('quizContainer').style.display = 'block';
+            document.getElementById('submitBtn').style.display = 'inline-block';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            document.getElementById('nextBtn').textContent = '下一题';
+            
             loadQuestion(0);
+            updateProgress();
         }
 
-        // 分类筛选
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                const category = this.dataset.category;
-                if (category === 'all') {
-                    filteredQuestions = questions;
-                } else {
-                    filteredQuestions = questions.filter(q => q.category === category);
-                }
-                
-                currentQuestion = 0;
-                score = 0;
-                userAnswers = [];
-                answeredQuestions = new Set();
-                
-                loadQuestion(0);
-                updateProgress();
-            });
-        });
-
-        // 初始化
-        init();
+        // 初始化显示模式选择
+        document.getElementById('quizInterface').classList.add('hidden');
+        document.getElementById('resultCard').classList.add('hidden');
     </script>
 </body>
 </html>
